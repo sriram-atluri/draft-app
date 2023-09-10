@@ -1,1 +1,21 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestapp-ui
+  labels:
+    app: guestapp-ui
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: guestapp-ui
+  template:
+    metadata:
+      labels:
+        app: guestapp-ui
+    spec:
+      containers:
+      - name: guestapp-ui
+        image: nanajanashia/argocd-app:1.0
+        ports:
+        - containerPort: 8080
