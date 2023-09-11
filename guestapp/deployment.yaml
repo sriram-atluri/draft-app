@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: guestapp-ui
-  labels:
-    app: guestapp-ui
+  name: guestbook-ui
 spec:
-  replicas: 3
+  replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: guestapp-ui
+      app: guestbook-ui
   template:
     metadata:
       labels:
-        app: guestapp-ui
+        app: guestbook-ui
     spec:
       containers:
-      - name: guestapp-ui
-        image: nanajanashia/argocd-app:1.0
+      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+        name: guestbook-ui
         ports:
-        - containerPort: 8080
+        - containerPort: 80
